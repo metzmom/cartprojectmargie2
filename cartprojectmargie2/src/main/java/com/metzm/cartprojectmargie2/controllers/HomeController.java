@@ -1,4 +1,4 @@
-package com.metzm.cartprojectmargie2.controller;
+package com.metzm.cartprojectmargie2.controllers;
 
 
 import org.springframework.stereotype.Controller;
