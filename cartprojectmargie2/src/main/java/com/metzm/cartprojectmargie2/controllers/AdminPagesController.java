@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -73,6 +74,9 @@ public class AdminPagesController {
 //if slug doesnt exist  danger
             redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
             redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+           // redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
+            redirectAttributes.addFlashAttribute("page", page);//THIS DOES NOT WORK
+
         } else {
             page.setSlug(slug);
             page.setSorting(100);//sorts to last page of data
@@ -80,7 +84,22 @@ public class AdminPagesController {
             pageRepo.save(page);//save the changes
 
         }
-        return "redirect:/admin/pages/add"; //return back to the page
+        return "redirect:/admin/pages/add"; //return to the page
+
     }
+        @GetMapping("/edit/{id}")
+        public String edit(@PathVariable int id, Model model) {
+
+            Page page = pageRepo.getOne(id);
+
+            model.addAttribute("page",page);
+
+            return "admin/pages/edit";
+
+        }
+
+
+
+
 
 }
