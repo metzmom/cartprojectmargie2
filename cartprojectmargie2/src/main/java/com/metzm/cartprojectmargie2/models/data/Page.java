@@ -1,4 +1,5 @@
-package models.data;
+package com.metzm.cartprojectmargie2.models.data;
+
 
 import javax.persistence.*;
 
@@ -7,11 +8,17 @@ import javax.persistence.*;
 public class Page {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    private String title;
+    private String slug;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -46,16 +53,12 @@ public class Page {
         this.sorting = sorting;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    private String title;
-
-    private String slug;
-
     private String content;
-
     private int sorting;
+
+
+
+
+
 
 }

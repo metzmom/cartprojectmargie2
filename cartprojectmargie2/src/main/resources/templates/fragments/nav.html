@@ -1,103 +1,35 @@
-<!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-front">
-   <a class="navbar-brand" href="/">Navbar</a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-           aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-   </button>
-
-   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-       <ul class="navbar-nav mr-auto">
-           <li class="nav-item active" th:each="page: ${cpages}"  th:if="${page.slug != 'home'}">
-               <a class="nav-link" th:href="@{'/' + ${page.slug}}" th:text="${page.title}"></a>
-           </li>
-       </ul>
-
-       <ul class="float-right navbar-nav" th:if="${principal == null}">
-           <li class="nav-item active">
-             <a th:href="@{/register}" class="nav-link">Register</a>
-           </li>
-           <li class="nav-item active">
-               <a th:href="@{/login}" class="nav-link">Login</a>
-           </li>
-       </ul>
-
-       <form th:if="${principal != null}" method="post" th:action="@{/logout}">
-           <span class="text-white" th:text="${'Hi, ' + principal}"></span>
-           <button class="btn btn-secondary">Logout</button>
-       </form>
-
-   </div>
-</nav>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-admin">
-   <a class="navbar-brand" href="/" target="_blank">Home Page</a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-           aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-   </button>
-
-   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-       <ul class="navbar-nav mr-auto">
-           <li class="nav-item active">
-               <a class="nav-link" href="/admin/pages">Pages</a>
-           </li>
-           <li class="nav-item active">
-               <a class="nav-link" href="/admin/categories">Categories</a>
-           </li>
-           <li class="nav-item active">
-               <a class="nav-link" href="/admin/products">Products</a>
-           </li>
-
-       </ul>
-
-       <form class="float-right" th:if="${principal != null}" method="post" th:action="@{/logout}">
-           <span class="text-white" th:text="${'Hi, ' + principal}"></span>
-           <button class="btn btn-secondary">Logout</button>
-       </form>
-   </div>
-</nav>-->
-
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-front">
-  <a class="navbar-brand" href="/">Microgreens 101 ROOT Page</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-   <span class="navbar-toggler-icon"></span>
- </button>
+    <a class="navbar-brand" href="/">Microgreens home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
- <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-   <ul class="navbar-nav mr-auto">
-     <li class="nav-item active">
-       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-     </li>
-     <li class="nav-item">
-       <a class="nav-link" href="#">Link</a>
-     </li>
-       <!--  <li class="nav-item">
-           <a class="nav-link disabled">Disabled</a>
-         </li>
-      <li> class="nav-item dropdown"
-      <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01"></div>
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another Action</a>
-          <a class="dropdown-item" href="#">Something Else Action</a>
-        </div>
-       </li>  $$$$$ this is the search button which was removed $$$$$
-        </ul>
-         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text"vplaceholder="Searh" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>-->
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
 
-   </div>
-</div>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text"vplaceholder="Searh" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    </div>
+    </div>
 </nav>
 
-<!--fragment for admin section-->
+
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="nav-admin">
-    <a class="navbar-brand" href="/" target="_blank">Microgreens admin page</a>
+    <a class="navbar-brand" href="/" target="_blank">Microgreens Admin</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -107,27 +39,12 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/admin/pages">Pages</a>
             </li>
-            <!--     <li class="nav-item">
-                   <a class="nav-link" href="#">Link</a>
-               </li>
-               <li class="nav-item">
-                   <a class="nav-link disabled">Disabled</a>
-               </li>
-             <li> class="nav-item dropdown"
-                   <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                   <div class="dropdown-menu" aria-labelledby="dropdown01"></div>
-                   <a class="dropdown-item" href="#">Action</a>
-                   <a class="dropdown-item" href="#">Another Action</a>
-                   <a class="dropdown-item" href="#">Something Else Action</a>
-       </div>
-       </li>-->
+
     </ul>
-        <!--remove search capabilities-->
-   <!-- <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="text"vplaceholder="Searh" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>-->
+    </form>
 
     </div>
     </div>
