@@ -3,6 +3,7 @@ package com.metzm.cartprojectmargie2.controllers;
 
 import com.metzm.cartprojectmargie2.models.data.Page;
 import com.metzm.cartprojectmargie2.models.data.PageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,13 @@ import java.util.List;
 @RequestMapping("/admin/pages")
 public class AdminPagesController {
 
+    @Autowired
     private PageRepository pageRepo;
 
-    public AdminPagesController(PageRepository pageRepo) {
-        this.pageRepo = pageRepo;
+//    public AdminPagesController(PageRepository pageRepo) {
+//        this.pageRepo = pageRepo;
 
-    }
+  //  }  autowired replaced this
 
 
     @GetMapping

@@ -2,6 +2,7 @@ package com.metzm.cartprojectmargie2.models.data;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="pages")
@@ -10,6 +11,8 @@ public class Page {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+
+    @Size(min=2, message = "size of title too short")
     private String title;
     private String slug;
 
@@ -52,7 +55,7 @@ public class Page {
     public void setSorting(int sorting) {
         this.sorting = sorting;
     }
-
+    @Size(min=5, message = "size of content too short")
     private String content;
     private int sorting;
 
