@@ -39,11 +39,10 @@ public class AdminPagesController {
 
         return "admin/pages/index";
     }
-
+//This get Mapping does same as live get add mapping that is live
 //    @GetMapping("/add")
 //    public String add (@ModelAttribute Page page) {
 //
-//     //   model.addAttribute("page", new Page());
 //        return "admin/pages/index";
 //    }
     @GetMapping("/add")

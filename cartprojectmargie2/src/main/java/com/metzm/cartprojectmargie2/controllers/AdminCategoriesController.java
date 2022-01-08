@@ -26,7 +26,31 @@ public class AdminCategoriesController{
             model.addAttribute("categories", categories);
 
             return "admin/categories/index";
+
         }
-        
-        
+    //This get Mapping does same as live get add mapping that is live
+    // @ModelAttribute("category")
+    // public Category getCategory() {
+    //     return new Category();
+    // }
+
+    //    @GetMapping("/add")
+    //    public String add (@ModelAttribute Category category) {
+    //
+    //        return "admin/pages/index";
+    //    }
+    //if you do use this @ModelAttribute it can be share as noted below.
+
+
+
+
+        @GetMapping("/add")
+        public String add (Model model) {
+
+        model.addAttribute("category", new Category());
+        return "admin/categories/add";
+    }
+
+
+
 }
