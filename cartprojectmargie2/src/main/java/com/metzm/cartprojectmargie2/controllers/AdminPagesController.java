@@ -74,8 +74,7 @@ public class AdminPagesController {
 //if slug doesnt exist  danger
             redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
             redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
-           // redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
-            redirectAttributes.addFlashAttribute("page", page);//THIS DOES NOT WORK
+            redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
 
         } else {
             page.setSlug(slug);
@@ -88,18 +87,62 @@ public class AdminPagesController {
 
     }
         @GetMapping("/edit/{id}")
-        public String edit(@PathVariable int id, Model model) {
+        public String edit (@PathVariable int id, Model model) {
 
             Page page = pageRepo.getOne(id);
 
-            model.addAttribute("page",page);
+            model.addAttribute("page", page);
 
             return "admin/pages/edit";
 
         }
+//post mapping edit here starts
+
+    @PostMapping("/edit")
+    public String edit (@Valid Page page, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
+        Page pageCurrent = pageRepo.getOne(page.getId());
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("pageTitle", pageCurrent.getTitle());
+            return "admin/pages/edit";  //contains error messages
+        }
+
+        redirectAttributes.addFlashAttribute("message", "PAGE EDITED");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+
+// this will enable the comparison of slug variable. if it exists change to lower case and replace spaces with -.
+        String slug = page.getSlug() =="" ? page.getTitle().toLowerCase().replace(" ", "-") : page.getSlug().toLowerCase().replace(" ","-");
 
 
+        // this will check to make sure only one slug exists because they are URL
+        Page slugExists = pageRepo.findBySlug(page.getId(), slug);//if slug exists but not for this page
 
+        if ( slugExists != null) {
+//if slug doesn't exist  danger
+            redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
+            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+            redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
+
+        } else {
+            page.setSlug(slug);
+          //  page.setSorting(100);//sorts to last page of data
+
+            pageRepo.save(page);//save the changes
+
+        }
+        return "redirect:/admin/pages/edit/" + page.getId(); //return to the page
+
+    }
+//    @GetMapping("/edit/{id}")
+//    public String edit(@PathVariable int id, Model model) {
+//
+//        Page page = pageRepo.getOne(id);
+//
+//        model.addAttribute("page",page);
+//
+//        return "admin/pages/edit";
+//
+//    }
 
 
 }
