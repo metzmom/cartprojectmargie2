@@ -23,6 +23,7 @@ public class AdminPagesController {
     @Autowired
     private PageRepository pageRepo;
 
+
 //    public AdminPagesController(PageRepository pageRepo) {
 //        this.pageRepo = pageRepo;
 
@@ -68,7 +69,7 @@ public class AdminPagesController {
 
 
    // this will check to make sure only one slug exists because they are URL
-        Page slugExists = pageRepo.findBySlug(slug);
+        Page slugExists = pageRepo.findBySlug(page.getId(), slug);
 
         if ( slugExists != null) {
 //if slug doesnt exist  danger
@@ -115,7 +116,7 @@ public class AdminPagesController {
 
 
         // this will check to make sure only one slug exists because they are URL
-        Page slugExists = pageRepo.findBySlug(page.getId(), slug);//if slug exists but not for this page
+        Page slugExists = pageRepo.findBySlug(page.getId(), slug);  //if slug exists but not for this page
 
         if ( slugExists != null) {
 //if slug doesn't exist  danger
@@ -133,6 +134,27 @@ public class AdminPagesController {
         return "redirect:/admin/pages/edit/" + page.getId(); //return to the page
 
     }
+    @GetMapping("/delete/{id}")
+    public String edit (@PathVariable int id, RedirectAttributes redirectAttributes) {
+//redirects page when page is deleted
+
+        pageRepo.deleteById(id);
+        redirectAttributes.addFlashAttribute("message", "Page Deleted");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");//must add message to the view @index html
+
+
+       // return "admin/pages/index";//not index because it is not a view that is being returned
+        return "redirect:/admin/pages";
+    }
+
+
+
+
+
+
+
+
+
 //    @GetMapping("/edit/{id}")
 //    public String edit(@PathVariable int id, Model model) {
 //
