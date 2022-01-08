@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -32,7 +29,11 @@ public class AdminPagesController {
 
     @GetMapping
     public String index(Model model) {
-    List<Page> pages = pageRepo.findAll();
+  //  List<Page> pages = pageRepo.findAll();
+
+    //this is for the sorting  I dont want  this keep line above and remove all sorting
+    List<Page> pages = pageRepo.findAllByOrderBySortingAsc();
+
 
     model.addAttribute("pages",pages);
 
@@ -147,24 +148,22 @@ public class AdminPagesController {
         return "redirect:/admin/pages";
     }
 
+    @PostMapping("/reorder")
+    public  @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
+        // public @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
+//reorder the pages
+        int count = 1;
+        Page page;
+//loop thru id and sort
+        for (int pageId : id) {
+            page = pageRepo.getOne(pageId);
+            page.setSorting(count);
+            pageRepo.save(page);
+            count++;
+        }
 
+        return "ok";
 
-
-
-
-
-
-
-//    @GetMapping("/edit/{id}")
-//    public String edit(@PathVariable int id, Model model) {
-//
-//        Page page = pageRepo.getOne(id);
-//
-//        model.addAttribute("page",page);
-//
-//        return "admin/pages/edit";
-//
-//    }
-
+    }
 
 }

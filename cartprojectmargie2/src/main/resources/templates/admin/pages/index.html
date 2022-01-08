@@ -17,14 +17,15 @@
       <!-- Notifies that the paged has been deleted on the banner of pages-->
         <div>
        <!-- <div th:if= "${!pages.empty}">-->
-            <table class="table">
-                <tr>
+            <table class="table sorting" id="pages">
+                <tr class="home"> <!--home cannot be sorted-->
                     <th>Title</th>
                     <th>Slug</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <tr th:each="page: ${pages}">
+                <!--inorder to sort every page needs an id written as id_-->
+                <tr th:each="page: ${pages}" th:id="'id_' + ${page.id}" th:class="${page.slug}">
                     <td th:text="${page.title}"></td>
                     <td th:text="${page.slug}"></td>
                     <td><a th:href="@{'/admin/pages/edit/' + ${page.id}}">Edit</a></td>
@@ -59,14 +60,7 @@
 
     <div th:replace="/fragments/footer"></div>
 
-   <!-- <script>
-
-    let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function (e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
-
+   <script>
     $("table#pages tbody").sortable({
         items: "tr:not(.home)",
         placeholder: "ui-state-highlight",
@@ -79,7 +73,7 @@
             });
         }
     });
-    </script>-->
+    </script>
 
     </body>
 

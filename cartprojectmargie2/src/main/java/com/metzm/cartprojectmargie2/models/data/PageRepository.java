@@ -5,6 +5,8 @@ package com.metzm.cartprojectmargie2.models.data;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface PageRepository extends JpaRepository<Page,Integer> {
 
        // Page findBySlug(int id, String slug);
@@ -17,5 +19,6 @@ public interface PageRepository extends JpaRepository<Page,Integer> {
     // if slug exists but not for this page
 
      //  Page findBySlugAndIdNot(String slug, int id);
+    List<Page> findAllByOrderBySortingAsc();
 
 }
