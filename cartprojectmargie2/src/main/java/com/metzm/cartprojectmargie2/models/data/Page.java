@@ -12,7 +12,7 @@ public class Page {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @Size(min=2, message = "size of title too short")
+    @Size(min=2, message = "size of title must be 2 characters")
     private String title;
     private String slug;
 
