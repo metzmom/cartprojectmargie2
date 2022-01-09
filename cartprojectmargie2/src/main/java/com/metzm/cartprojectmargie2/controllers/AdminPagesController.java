@@ -20,21 +20,16 @@ public class AdminPagesController {
     @Autowired
     private PageRepository pageRepo;
 
-
 //    public AdminPagesController(PageRepository pageRepo) {
 //        this.pageRepo = pageRepo;
 
   //  }  autowired replaced this
-
-
     @GetMapping
     public String index(Model model) {
   //  List<Page> pages = pageRepo.findAll();
 
     //this is for the sorting  I dont want  this keep line above and remove all sorting
     List<Page> pages = pageRepo.findAllByOrderBySortingAsc();
-
-
     model.addAttribute("pages",pages);
 
         return "admin/pages/index";
@@ -54,6 +49,7 @@ public class AdminPagesController {
 
 
 //to redirect for errors
+
 
     @PostMapping("/add")
     public String add (@Valid Page page, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
@@ -99,70 +95,70 @@ public class AdminPagesController {
         }
 //post mapping edit here starts
 
-    @PostMapping("/edit")
-    public String edit (@Valid Page page, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
-        Page pageCurrent = pageRepo.getOne(page.getId());
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("pageTitle", pageCurrent.getTitle());
-            return "admin/pages/edit";  //contains error messages
-        }
-
-        redirectAttributes.addFlashAttribute("message", "PAGE EDITED");
-        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-
-// this will enable the comparison of slug variable. if it exists change to lower case and replace spaces with -.
-        String slug = page.getSlug() =="" ? page.getTitle().toLowerCase().replace(" ", "-") : page.getSlug().toLowerCase().replace(" ","-");
-
-
-        // this will check to make sure only one slug exists because they are URL
-        Page slugExists = pageRepo.findBySlug(page.getId(), slug);  //if slug exists but not for this page
-
-        if ( slugExists != null) {
-//if slug doesn't exist  danger
-            redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
-            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
-            redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
-
-        } else {
-            page.setSlug(slug);
-          //  page.setSorting(100);//sorts to last page of data
-
-            pageRepo.save(page);//save the changes
-
-        }
-        return "redirect:/admin/pages/edit/" + page.getId(); //return to the page
-
-    }
-    @GetMapping("/delete/{id}")
-    public String edit (@PathVariable int id, RedirectAttributes redirectAttributes) {
-//redirects page when page is deleted
-
-        pageRepo.deleteById(id);
-        redirectAttributes.addFlashAttribute("message", "Page Deleted");
-        redirectAttributes.addFlashAttribute("alertClass", "alert-success");//must add message to the view @index html
-
-
-       // return "admin/pages/index";//not index because it is not a view that is being returned
-        return "redirect:/admin/pages";
-    }
-
-    @PostMapping("/reorder")
-    public  @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
-        // public @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
-//reorder the pages
-        int count = 1;
-        Page page;
-//loop thru id and sort
-        for (int pageId : id) {
-            page = pageRepo.getOne(pageId);
-            page.setSorting(count);
-            pageRepo.save(page);
-            count++;
-        }
-
-        return "ok";
-
-    }
+//    @PostMapping("/edit")
+//    public String edit (@Valid Page page, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model){
+//        Page pageCurrent = pageRepo.getOne(page.getId());
+//
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("pageTitle", pageCurrent.getTitle());
+//            return "admin/pages/edit";  //contains error messages
+//        }
+//
+//        redirectAttributes.addFlashAttribute("message", "PAGE EDITED");
+//        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+//
+//// this will enable the comparison of slug variable. if it exists change to lower case and replace spaces with -.
+//        String slug = page.getSlug() =="" ? page.getTitle().toLowerCase().replace(" ", "-") : page.getSlug().toLowerCase().replace(" ","-");
+//
+//
+//        // this will check to make sure only one slug exists because they are URL
+//        Page slugExists = pageRepo.findBySlug(page.getId(), slug);  //if slug exists but not for this page
+//
+//        if ( slugExists != null) {
+////if slug doesn't exist  danger
+//            redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
+//            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+//            redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
+//
+//        } else {
+//            page.setSlug(slug);
+//          //  page.setSorting(100);//sorts to last page of data
+//
+//            pageRepo.save(page);//save the changes
+//
+//        }
+//        return "redirect:/admin/pages/edit/" + page.getId(); //return to the page
+//
+//    }
+//    @GetMapping("/delete/{id}")
+//    public String edit (@PathVariable int id, RedirectAttributes redirectAttributes) {
+////redirects page when page is deleted
+//
+//        pageRepo.deleteById(id);
+//        redirectAttributes.addFlashAttribute("message", "Page Deleted");
+//        redirectAttributes.addFlashAttribute("alertClass", "alert-success");//must add message to the view @index html
+//
+//
+//       // return "admin/pages/index";//not index because it is not a view that is being returned
+//        return "redirect:/admin/pages";
+//    }
+//
+//    @PostMapping("/reorder")
+//    public  @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
+//        // public @ResponseBody String reorder(@RequestParam("id[]") int[] id) {
+////reorder the pages
+//        int count = 1;
+//        Page page;
+////loop thru id and sort
+//        for (int pageId : id) {
+//            page = pageRepo.getOne(pageId);
+//            page.setSorting(count);
+//            pageRepo.save(page);
+//            count++;
+//        }
+//
+//        return "ok";
+//
+//    }
 
 }
