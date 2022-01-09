@@ -17,7 +17,7 @@
     <!-- Notifies that the paged has been deleted on the banner of pages-->
     <div>
        <div th:if= "${!categories.empty}">
-        <table class="table sorting" id="pages">
+        <table class="table sorting" id="categories">
             <tr class="home"> <!--home cannot be sorted-->
               <!--  <th>Title</th>-->
                 <th>Name</th>
@@ -36,23 +36,6 @@
         </table>
     </div>
 
-    <!--   <div th:if="${!pages.empty}">
-           <table class="table sorting" id="pages">
-               <tr class="home">
-                   <th>Title</th>
-                   <th>Slug</th>
-                   <th>Edit</th>
-                   <th>Delete</th>
-               </tr>
-               <tr th:each="page: ${pages}" th:id="'id_' + ${page.id}" th:class="${page.slug}">
-                   <td th:text="${page.title}"></td>
-                   <td th:text="${page.slug}"></td>
-                   <td><a th:href="@{'/admin/pages/edit/' + ${page.id}}">Edit</a></td>
-                   <td><a th:if="${page.slug != 'home'}" th:href="@{'/admin/pages/delete/' + ${page.id}}" class="confirmDeletion">Delete</a></td>
-               </tr>
-           </table>
-       </div>-->
-
      <div th:unless="${!categories.empty}">
            <h4 class="display-4">There are no categories at the moment</h4>
      </div>
@@ -62,12 +45,12 @@
 <div th:replace="/fragments/footer"></div>
 
 <script>
-    $("table#pages tbody").sortable({
+    $("table#categories tbody").sortable({
         items: "tr:not(.home)",
         placeholder: "ui-state-highlight",
         update: function() {
-            let ids = $("table#pages tbody").sortable("serialize");
-            let url = "/admin/pages/reorder";
+            let ids = $("table#categories tbody").sortable("serialize");
+            let url = "/admin/categories/reorder";
 
             $.post(url, ids, function (data) {
                 console.log(data);
