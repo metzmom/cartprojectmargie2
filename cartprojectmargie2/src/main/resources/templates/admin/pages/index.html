@@ -16,46 +16,27 @@
 
       <!-- Notifies that the paged has been deleted on the banner of pages-->
         <div>
-       <!-- <div th:if= "${!pages.empty}">-->
-            <table class="table sorting" id="pages">
-                <tr class="home"> <!--home cannot be sorted-->
-                    <th>Title</th>
-                    <th>Slug</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                <!--inorder to sort every page needs an id written as id_-->
-                <tr th:each="page: ${pages}" th:id="'id_' + ${page.id}" th:class="${page.slug}">
-                    <td th:text="${page.title}"></td>
-                    <td th:text="${page.slug}"></td>
-                    <td><a th:href="@{'/admin/pages/edit/' + ${page.id}}">Edit</a></td>
-                    <td><a th:if="${page.slug != 'home'}" th:href="@{'/admin/pages/delete/' + ${page.id}}" class="confirmDeletion">Delete</a></td>
-                 <!--   <td><a th:href="@{'/admin/pages/delete/' + ${page.id}}"  class="confirmDeletion" >Delete</a></td>-->
-                    <!--//allows for deletion-->
-                </tr>
-            </table>
-        </div>
 
-     <!--   <div th:if="${!pages.empty}">
-            <table class="table sorting" id="pages">
-                <tr class="home">
-                    <th>Title</th>
-                    <th>Slug</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-                <tr th:each="page: ${pages}" th:id="'id_' + ${page.id}" th:class="${page.slug}">
-                    <td th:text="${page.title}"></td>
-                    <td th:text="${page.slug}"></td>
-                    <td><a th:href="@{'/admin/pages/edit/' + ${page.id}}">Edit</a></td>
-                    <td><a th:if="${page.slug != 'home'}" th:href="@{'/admin/pages/delete/' + ${page.id}}" class="confirmDeletion">Delete</a></td>
-                </tr>
-            </table>
-        </div>-->
+           <div th:if="${!pages.empty}">
+                <table class="table sorting" id="pages">
+                    <tr class="home">
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr th:each="page: ${pages}" th:id="'id_' + ${page.id}" th:class="${page.slug}">
+                        <td th:text="${page.title}"></td>
+                        <td th:text="${page.slug}"></td>
+                        <td><a th:href="@{'/admin/pages/edit/' + ${page.id}}">Edit</a></td>
+                        <td><a th:if="${page.slug != 'home'}" th:href="@{'/admin/pages/delete/' + ${page.id}}" >class="confirmDeletion">Delete</a></td>
+                    </tr>
+                </table>
+            </div>
 
-     <!-- <div th:unless="${!pages.empty}">
+    <div th:unless="${!pages.empty}">
             <h4 class="display-4">There are no pages at the moment</h4>
-      </div>-->
+      </div>
 
     </div>
 
