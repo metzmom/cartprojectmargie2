@@ -1,6 +1,8 @@
 package com.metzm.cartprojectmargie2.controllers;
 
 
+import com.metzm.cartprojectmargie2.models.CategoryRepository;
+import com.metzm.cartprojectmargie2.models.data.Category;
 import com.metzm.cartprojectmargie2.models.data.Product;
 import com.metzm.cartprojectmargie2.models.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,24 +18,28 @@ import java.util.List;
 public class AdminProductsController {
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository productRepo;
+
+    @Autowired
+    private CategoryRepository categoryRepo;
+    //need to have this to connect product it with category id
 
     @GetMapping
     public String index(Model model) {
 
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productRepo.findAll();
         model.addAttribute("products", products);
         //passes to view index
         return "admin/products/index";
 
-
-
     }
+    @GetMapping("/add")
+    public String add (Product product, Model model) {
+    //need both product and model to match up for category and product by 1dthru categoryRepo
+     List<Category> categories = categoryRepo.findAll();
+        model.addAttribute("categories", categories);
 
-
-
-
-
-
+        return "admin/products/add";
+    }
 
 }
