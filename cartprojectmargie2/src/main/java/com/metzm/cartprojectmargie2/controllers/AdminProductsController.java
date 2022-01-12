@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -37,7 +39,17 @@ public class AdminProductsController {
     public String index(Model model) {
 
         List<Product> products = productRepo.findAll();
+        List<Category> categories = categoryRepo.findAll();
+
+        HashMap<Integer, String> cats = new HashMap<>();
+         for (Category cat : categories){
+            cats.put(cat.getId(), cat.getName());
+        }
+
+
+
         model.addAttribute("products", products);
+        model.addAttribute("cats",cats);
         //passes to view index
         return "admin/products/index";
 
@@ -48,8 +60,9 @@ public class AdminProductsController {
         //need both product and model to match up for category and product by 1dthru categoryRepo
         List<Category> categories = categoryRepo.findAll();
         model.addAttribute("categories", categories);
-
         return "admin/products/add";
+
+
     }
 
     @PostMapping("/add")
@@ -128,5 +141,15 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM */
 
         return "redirect:/admin/products/add";
     }
+    @GetMapping("/edit/{id}")
+    public String edit (@PathVariable int id, Model model) {
 
+        Product product = productRepo.getOne(id);
+        List<Category> categories = categoryRepo.findAll();
+
+        model.addAttribute("product", product);
+        model.addAttribute("category", categories);
+        return "admin/products/edit";
+
+    }
 }
