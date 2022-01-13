@@ -22,7 +22,6 @@ public class AdminPagesController {
 
         //    public AdminPagesController(PageRepository pageRepo) {
         //        this.pageRepo = pageRepo;
-
           //  }  autowired replaced this
     @GetMapping
     public String index(Model model) {
@@ -62,7 +61,7 @@ public class AdminPagesController {
                 : page.getSlug().toLowerCase().replace(" ","-");
 
          // this will check to make sure only one slug exists because they are URL
-        Page slugExists = pageRepo.findBySlug(page.getId(), slug);
+        Page slugExists = pageRepo.findBySlug(slug);
 
         if ( slugExists != null) {//if slug doesn't exist  danger
             redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
@@ -108,8 +107,8 @@ public class AdminPagesController {
 
 
         // this will check to make sure only one slug exists because they are URL
-        Page slugExists = pageRepo.findBySlug(page.getId(), slug);  //if slug exists but not for this page
-
+       //  Page slugExists = pageRepo.findBySlug(slug);  //if slug exists but not for this page  BBBBBBBBBBBBBBBBB
+        Page slugExists = pageRepo.findBySlugAndIdNot(slug, page.getId());
         if ( slugExists != null) {
             //if slug doesn't exist  danger
             redirectAttributes.addFlashAttribute("message", "slug exists, choose another");

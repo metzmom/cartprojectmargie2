@@ -4,7 +4,23 @@ $(function () {
         if (!confirm("Confirm deletion")) return false;
     });
 
- });
+    if ( $("#content").length) {
+        ClassicEditor
+            .create(document.querySelector("#content"))
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    if ( $("#description").length) {
+        ClassicEditor
+            .create(document.querySelector("#description"))
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+});
     function readURL(input, idNum) {
      if (input.files && input.files[0]) {
           let reader = new FileReader();
