@@ -42,14 +42,13 @@ public class AdminProductsController {
         List<Category> categories = categoryRepo.findAll();
 
         HashMap<Integer, String> cats = new HashMap<>();
-         for (Category cat : categories){
+        for (Category cat : categories) {
             cats.put(cat.getId(), cat.getName());
         }
 
 
-
         model.addAttribute("products", products);
-        model.addAttribute("cats",cats);
+        model.addAttribute("cats", cats);
         //passes to view index
         return "admin/products/index";
 
@@ -68,37 +67,7 @@ public class AdminProductsController {
     @PostMapping("/add")
     public String add(@Valid Product product, BindingResult bindingResult, MultipartFile file,
                       RedirectAttributes redirectAttributes, Model model)
-                       throws IOException {
-        if (bindingResult.hasErrors()) {
-            return "admin/products/add";  //contains error messages
-        }
-/*MMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-        redirectAttributes.addFlashAttribute("message", "PAGE added");
-        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
-
-        // this will enable the comparison of slug variable. if it exists change to lower case and replace spaces with -.
-        String slug = page.getSlug() =="" ? page.getTitle().toLowerCase().replace(" ", "-")
-                : page.getSlug().toLowerCase().replace(" ","-");
-
-        // this will check to make sure only one slug exists because they are URL
-        Page slugExists = pageRepo.findBySlug(page.getId(), slug);
-
-        if ( slugExists != null) {//if slug doesn't exist  danger
-            redirectAttributes.addFlashAttribute("message", "slug exists, choose another");
-            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
-            redirectAttributes.addFlashAttribute("page", page);//makes sure input which causes errors sticks
-
-        } else {
-            page.setSlug(slug);
-            page.setSorting(100);//sorts to last page of data
-
-            pageRepo.save(page);//save the changes
-
-        }
-        return "redirect:/admin/pages/add"; //return to the page
-
-}
-MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM */
+            throws IOException {
 
         List<Category> categories = categoryRepo.findAll();
 
@@ -141,8 +110,9 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM */
 
         return "redirect:/admin/products/add";
     }
+
     @GetMapping("/edit/{id}")
-    public String edit (@PathVariable int id, Model model) {
+    public String edit(@PathVariable int id, Model model) {
 
         Product product = productRepo.getOne(id);
         List<Category> categories = categoryRepo.findAll();
@@ -152,4 +122,86 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM */
         return "admin/products/edit";
 
     }
+
+    @PostMapping("/edit")
+    public String edit(@Valid Product product, BindingResult bindingResult, MultipartFile file,
+                       RedirectAttributes redirectAttributes, Model model)
+            throws IOException {
+
+
+        Product currentProduct = productRepo.getOne(product.getId());
+
+        List<Category> categories = categoryRepo.findAll();
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("productName", currentProduct.getName());
+            model.addAttribute("categories", categories);
+            return "admin/products/edit";//contains error messages
+        }
+
+        boolean fileOK = false;
+        byte[] bytes = file.getBytes();
+        String filename = file.getOriginalFilename();
+        Path path = Paths.get("src/main/resources/static/media/" + filename);
+
+        //do not make picture mandatory field
+        if (!file.isEmpty()) {
+            if (filename.endsWith("jpg") || filename.endsWith("png")) {
+                fileOK = true;
+            }
+        } else {
+            fileOK = true;
+        }
+
+        redirectAttributes.addFlashAttribute("message", "Product edited");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+
+        String slug = product.getName().toLowerCase().replace(" ", "-");
+
+        Product productExists = productRepo.findBySlugAndIdNot(slug, product.getId());
+
+        if (!fileOK) {
+            redirectAttributes.addFlashAttribute("message", "Image must be a jpg or a png");
+            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+            redirectAttributes.addFlashAttribute("product", product);
+        } else if (productExists != null) {
+            redirectAttributes.addFlashAttribute("message", "Product exists, choose another");
+            redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
+            redirectAttributes.addFlashAttribute("product", product);
+        } else {
+            if (!file.isEmpty()) {
+                Path path2 = Paths.get("src/main/resources/static/media/" + currentProduct.getImage());
+                Files.delete(path2);
+                product.setImage(filename);
+                Files.write(path, bytes);
+            } else {
+                product.setImage(currentProduct.getImage());
+            }
+            productRepo.save(product);
+        }
+
+
+        return "redirect:/admin/products/edit/" + product.getId();
+
+
+    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id, RedirectAttributes redirectAttributes) throws IOException {
+
+        Product product = productRepo.getOne(id);
+        Product currentProduct = productRepo.getOne(product.getId());
+
+        Path path2 = Paths.get("src/main/resources/static/media/" + currentProduct.getImage());
+        Files.delete(path2);
+        productRepo.deleteById(id);
+
+        redirectAttributes.addFlashAttribute("message", "Product deleted");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+
+        return "redirect:/admin/products";
+
+    }
+
+
+
 }
