@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry
             .addResourceHandler("/media/**")
-            .addResourceLocations("file:/C:/Users/richa/Documents/footprint/cartprojectmargie2/src/main/resources/static/media/**");
+            .addResourceLocations("file:///C:/Users/richa/Documents/footprint/cartprojectmargie2/src/main/resources/static/media/**");
     }
 
 }

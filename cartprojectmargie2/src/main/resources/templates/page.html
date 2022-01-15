@@ -1,5 +1,4 @@
     <!doctype html>
-    <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
     <!--   <head th:replace="/fragments/head"></head>
 
@@ -10,16 +9,16 @@
        <div class="container-fluid mt-5">
            <div class="row">
                 <div class="col"> </div>-->
-                 <!--   <h1> MICROGREENS 101</h1>-->
-         <!--        <div class="col-7" th:utext="${page.content}"></div>
-                 <div class="col"></div>
-            </div>
-        </div>
+    <!--   <h1> MICROGREENS 101</h1>-->
+    <!--        <div class="col-7" th:utext="${page.content}"></div>
+            <div class="col"></div>
+       </div>
+   </div>
 
-        <div th:replace="/fragments/footer"></div>
+   <div th:replace="/fragments/footer"></div>
 
-    </body>
-    </html>-->
+</body>
+</html>-->
 
     <head th:replace="/fragments/head"></head>
 
@@ -29,16 +28,15 @@
 
     <div class="container-fluid mt-5">
         <div class="row">
-            <!--        <div th:replace="/fragments/categories"></div> this did appear on home page but changed it to a fragment see above line-->
-           <div class="col-3">categories</div>
-               <div class="col"></div>
-               <div class="col-7" th:utext="${page.content}"></div>
-               <div class="col"></div>
-           </div>
-       </div>
+        <div th:replace="/fragments/categories"></div>
+            <!--               <div class="col-3">categories</div>his did appear on home page but changed it to a fragment see above line-->
+              <div class="col"></div>
+              <div class="col-7" th:utext="${page.content}"></div>
+              <div class="col"></div>
+          </div>
+      </div>
 
-       <div th:replace="/fragments/footer"></div>
+      <div th:replace="/fragments/footer"></div>
 
-       </body>
+      </body>
 
-       </html>
