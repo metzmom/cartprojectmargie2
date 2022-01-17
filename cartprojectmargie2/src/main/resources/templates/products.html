@@ -65,7 +65,7 @@
                         <h4 th:text="${product.name}"></h4>
                         <div class="desc" th:utext="${product.description}"></div>
                         <p th:text="'$' + ${product.price}"></p>
-                        <div style="position: relative;">
+                        <div style="position: relative;"><!--add ajax to load image correctly-->
                             <p>
                                 <a class="btn btn-primary addToCart"
                                    th:attr="data-id=${product.id}"
@@ -97,7 +97,7 @@
 
     <div th:replace="/fragments/footer"></div>
 
-   <!-- <script>
+    <script>
 
         $("a.addToCart").click(function (e) {
             e.preventDefault();
@@ -120,8 +120,9 @@
             });
         });
 
-    </script>-->
+    </script>
 
     </body>
 
     </html>
+
