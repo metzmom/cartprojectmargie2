@@ -18,20 +18,20 @@ import java.util.List;
 
 @ControllerAdvice
 @SuppressWarnings("unchecked")
-    public class Common {
+    public class Common {//&&&&&&& origional
 
     @Autowired
-    private PageRepository pageRepo;
+    private PageRepository pageRepo;//&&&&&&& origional
 
     @Autowired
-    private CategoryRepository categoryRepo;
+    private CategoryRepository categoryRepo;//this is for the menu *********
 
     @ModelAttribute
-    public void sharedData(Model model, HttpSession session) {
+    public void sharedData(Model model, HttpSession session) {//&&&&&&& origional just Model model
 
-        List<Page> pages = pageRepo.findAllByOrderBySortingAsc();
+        List<Page> pages = pageRepo.findAllByOrderBySortingAsc();//&&&&&&& origional
 
-        List<Category> categories = categoryRepo.findAll();
+        List<Category> categories = categoryRepo.findAll();//this is for the menu//this is for the menu *********
 
         boolean cartActive = false;
 
@@ -52,8 +52,8 @@ import java.util.List;
             cartActive = true;
         }
 
-        model.addAttribute("cpages", pages);
-        model.addAttribute("ccategories", categories);
+        model.addAttribute("cpages", pages);//&&&&&&& origional
+        model.addAttribute("ccategories", categories);//this is for the menu *********then update page.html
         model.addAttribute("cartActive", cartActive);
     }
 

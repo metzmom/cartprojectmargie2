@@ -1,5 +1,6 @@
 package com.metzm.cartprojectmargie2.models.data;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "users")
-
+@Data
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1l;
@@ -25,19 +26,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
     public void setPassword(String password) {
         this.password = password;
