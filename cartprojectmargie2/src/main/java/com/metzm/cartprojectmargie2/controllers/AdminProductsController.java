@@ -62,14 +62,14 @@ public class AdminProductsController {
         Pageable pageable = PageRequest.of(page, perPage);
 
         Page<Product> products = productRepo.findAll(pageable);
-        List<Category> categories = categoryRepo.findAll();
+        List<Category> categories = categoryRepo.findAll();//*******need this
 
         HashMap<Integer, String> cats = new HashMap<>();
         for (Category cat : categories) {
             cats.put(cat.getId(), cat.getName());
         }
 
-        model.addAttribute("products", products);
+        model.addAttribute("products", products);//**********need this
         model.addAttribute("cats", cats);
 
         long count = productRepo.count();
@@ -80,7 +80,7 @@ public class AdminProductsController {
         model.addAttribute("count", count);
         model.addAttribute("page", page);
 
-        return "admin/products/index";
+        return "admin/products/index";//**********need this
     }
 
     @GetMapping("/add")
@@ -147,7 +147,7 @@ public class AdminProductsController {
         List<Category> categories = categoryRepo.findAll();
 
         model.addAttribute("product", product);
-        model.addAttribute("category", categories);
+        model.addAttribute("categories", categories);
         return "admin/products/edit";
 
     }
@@ -198,6 +198,8 @@ public class AdminProductsController {
             redirectAttributes.addFlashAttribute("alertClass", "alert-danger");
             redirectAttributes.addFlashAttribute("product", product);
         } else {
+            product.setSlug(slug);
+
             if (!file.isEmpty()) {
                 Path path2 = Paths.get("src/main/resources/static/media/" + currentProduct.getImage());
                 Files.delete(path2);

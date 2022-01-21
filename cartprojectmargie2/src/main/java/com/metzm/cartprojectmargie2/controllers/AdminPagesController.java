@@ -27,7 +27,7 @@ public class AdminPagesController {
     public String index(Model model) {
     //  List<Page> pages = pageRepo.findAll();
 
-    //this is for the sorting  I dont want  this keep line above and remove all sorting
+
     List<Page> pages = pageRepo.findAllByOrderBySortingAsc();
     model.addAttribute("pages",pages);
 
