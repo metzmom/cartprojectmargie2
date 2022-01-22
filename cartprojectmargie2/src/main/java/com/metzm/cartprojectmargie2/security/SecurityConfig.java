@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
+    @Override//looking up data on user
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(userDetailsService)
@@ -59,18 +59,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-              //  .antMatchers("/category/**").hasAnyRole("USER", "ADMIN")
-                //.antMatchers("/admin/**").hasAnyRole("ADMIN")
+            //   .antMatchers("/category/**").hasAnyRole("USER", "ADMIN")
+
+              .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/").permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/")
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/");
+                     .and()
+                         .formLogin()
+                         .loginPage("/login")
+                              .and()
+                                 .logout()
+                                 .logoutSuccessUrl("/")
+                              .and()
+                                  .exceptionHandling()
+                                      .accessDeniedPage("/");
         // .antMatchers("/**").hasAnyRole("USER");
 
         // http

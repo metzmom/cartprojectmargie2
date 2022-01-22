@@ -23,7 +23,7 @@
 
                 <div class="form-group">
                     <label >Username:</label>
-                    <input type="email" class="form-control" th:field="*{username}" placeholder="Username">
+                    <input type="text" class="form-control" th:field="*{username}" placeholder="Username">
                     <span class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                 </div>
 
