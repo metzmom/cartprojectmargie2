@@ -126,7 +126,7 @@ public class AdminPagesController {
 
     }
     @GetMapping("/delete/{id}")
-    public String edit (@PathVariable int id, RedirectAttributes redirectAttributes) {
+    public String delete (@PathVariable int id, RedirectAttributes redirectAttributes) {
     //redirects page when page is deleted
 
         pageRepo.deleteById(id);

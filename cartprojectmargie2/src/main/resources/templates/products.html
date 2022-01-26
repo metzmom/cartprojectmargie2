@@ -64,12 +64,12 @@
                         </p>
                         <h4 th:text="${product.name}"></h4>
                         <div class="desc" th:utext="${product.description}"></div>
-                        <p th:text="'$' + ${product.price}"></p>
+                   <!--     <p th:text="'$' + ${product.price}"></p>-->
                         <div style="position: relative;"><!--add ajax to load image correctly-->
                             <p>
                                 <a class="btn btn-primary addToCart"
                                    th:attr="data-id=${product.id}"
-                                   th:href="@{'/cart/add/' + ${product.id}}">Add to cart</a>
+                                   th:href="@{'/cart/add/' + ${product.id}}">Add to list</a>
                                 <img class="ajaxLoader d-none" src="/images/ajax-loader.gif">
                             </p>
                             <div class="btn btn-sm btn-success hide productAdded">Product added!</div>
