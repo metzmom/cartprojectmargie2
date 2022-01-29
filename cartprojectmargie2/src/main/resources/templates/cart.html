@@ -39,23 +39,24 @@
                         <!--   </td>
                          <td th:text="'$' + ${el.value.price}"></td>-->
                  <!-- add the price of the product-->
-                <!--    <td th:with="formattedTotal=${el.value.price} * ${el.value.quantity}" th:text="'$' + ${#numbers.formatDecimal(formattedTotal, 0, 'COMMA', 2, 'POINT')}"
-                    >-->
-                        <!--   </td>-->
-                          <!--      </tr>
-                              <tr>
+                <!--  <td th:with="formattedTotal=${el.value.price} * ${el.value.quantity}" th:text="'$' + ${#numbers.formatDecimal(formattedTotal, 0, 'COMMA', 2, 'POINT')}"  >-->
+                       <!--   </td>-->
+                       <!--      </tr>
+                                 <tr>
                                   <td class="text-right" colspan="4"><b>Grand Total:</b></td>-->
                             <!-- total of the cart-->
-                        <!--        <td colspan="1" th:text="'$' + ${#numbers.formatDecimal(ctotal, 0, 'COMMA', 2, 'POINT')}"></td>
+                             <!--        <td colspan="1" th:text="'$' + ${#numbers.formatDecimal(ctotal, 0, 'COMMA', 2, 'POINT')}"></td>
                       </tr>
                       <tr>
                           <td>-->
+                        <!--clear the cart added at bottom of cart overview-->
                        <td colspan="2" class="text-right">
-                        <a href="/cart/clear" class="btn btn-danger">Clear List</a><!--clear the cart added at bottom of cart overview-->
-                          </td>
-                          <td colspan="4" class="text-right">
-                              <a href="#" class="btn btn-success checkout">Print List</a><!--checkout to link to paypal-->
-                    </td>
+                           <a href="/cart/clear" class="btn btn-danger">Clear List</a>
+                        </td>
+                    <!--    <td colspan="4" class="text-right">
+                        <a href="#" class="btn btn-success checkout">Print List</a>-->
+                                <!--checkout to link to paypal-->
+                        </td>
                 </tr>
             </table>
         </div>
@@ -63,8 +64,7 @@
     </div>
 </div>
 <div>
-    <!--    <form id="paypalform" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">-->
-  <form id="paypalform" action= "@{/view/}"   method="post">
+     <form id="paypalform" action= "https://www.sandbox.paypal.com/cgi-bin/webscr"   method="post">
       <input type="hidden" name="cmd" value="_cart">
       <input type="hidden" name="upload" value="1">
       <input type="hidden" name="business" value="emeraldvalleymicrofarm@gmail.com">
@@ -87,14 +87,14 @@
                      e.preventDefault();
                      $("div.overlay").removeClass("d-none");
                      $.get("/cart/clear", {}, function () {});
-                     $("form#paypalform").submit()
+                     $(/cart/add/).submit()
                  });
-             });
+
          </script>
 
 </body>
 
 </html>
 
-<!--  //  $("form#paypalform").submit();-->
+
 
