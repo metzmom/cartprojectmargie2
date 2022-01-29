@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+    <body>
+        <header th:replace="fragments :: loggedInPageHeader"></header>
+
+        <br>
+        <br>
+      
+        <h1>My Saved Trips</h1>
+        <div class="flex-container">
+            <div th:each="trip : ${trips}">
+                <a class="trip-card" th:text="${trip.tripName}" th:href=" '/trips/trip?tripId=' + ${trip.id} "></a>
+            </div>
+            <p th:text="${noTrips}"></p>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+    </body>
+</html>

@@ -19,7 +19,7 @@
           <div th:if= "${!categories.empty}">
              <table class="table sorting" id="categories">
                  <tr class="home"> <!--home cannot be sorted-->
-                      <!--  <th>Title</th>-->
+                    <!--  <th>Title</th>-->
                    <th>Name</th>
                    <th>Edit</th>
                    <th>Delete</th>
@@ -30,8 +30,7 @@
                      <!-- <td th:text="${page.slug}"></td>-->
                     <td><a th:href="@{'/admin/categories/edit/' + ${category.id}}">Edit</a></td>
                     <td><a  th:href="@{'/admin/categories/delete/' + ${category.id}}" class="confirmDeletion">Delete</a></td>
-                     <!--   <td><a th:href="@{'/admin/pages/delete/' + ${page.id}}"  class="confirmDeletion" >Delete</a></td>-->
-                     <!--//allows for deletion-->
+                                         <!--//allows for deletion-->
                  </tr>
              </table>
           </div>
@@ -45,20 +44,20 @@
     <div th:replace="/fragments/footer"></div>
 
     <script>
- let token = $("meta[name='_csrf']").attr("content");
-    let header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function (e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
+        let token = $("meta[name='_csrf']").attr("content");
+          let header = $("meta[name='_csrf_header']").attr("content");
+          $(document).ajaxSend(function (e, xhr, options) {
+                xhr.setRequestHeader(header, token);
+         });
 
-    $("table#categories tbody").sortable({
-        items: "tr:not(.home)",
-        placeholder: "ui-state-highlight",
-        update: function() {
-            let ids = $("table#categories tbody").sortable("serialize");
-            let url = "/admin/categories/reorder";
+         $("table#categories tbody").sortable({
+                items: "tr:not(.home)",
+               placeholder: "ui-state-highlight",
+               update: function() {
+                   let ids = $("table#categories tbody").sortable("serialize");
+                 let url = "/admin/categories/reorder";
 
-            $.post(url, ids, function (data) {
+                    $.post(url, ids, function (data) {
                 console.log(data);
             });
         }

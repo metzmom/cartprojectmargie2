@@ -54,7 +54,7 @@ public class AdminProductsController {
 //
 //    }
 
-    @GetMapping
+    @GetMapping// this is for pagination
     public String index(Model model, @RequestParam(value="page", required = false) Integer p) {
 
         int perPage = 6;

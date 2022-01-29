@@ -28,6 +28,7 @@ public class CategoriesController {
     @Autowired
     private ProductRepository productRepo;
 
+//https://www.javatpoint.com/bootstrap-pagination
     @GetMapping("/{slug}")
     public String category(@PathVariable String slug, Model model, @RequestParam(value="page", required = false) Integer p) {
 

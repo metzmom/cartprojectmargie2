@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <link th:href="@{/styles.css}" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet">
+    <script th:src="decodeWaypoints.js"></script>
+    <script th:src="script.js"></script>
+    <meta charset="UTF-8"/>
+    <title>RoadTrip Runner</title>
+</head>
+<body>
+    <div th:fragment = "loggedInPageHeader" class="wrapper">
+        <a id="login" th:href="@{/logout}">Logout</a>
+        <p id="welcome" th:text="'Welcome, ' + ${loggedInUser.getUsername} + '!'"></p>
+
+        <a th:href="@{/landing}">
+            <img id="titleImg" th:src="@{/logo.png}" alt="RoadTrip Runner"/>
+        </a>
+            <br><br>
+        <a th:href = "@{/trips}" id="headerLink">My Saved Trips</a>
+        <a th:href = "@{/planATrip}" id="headerLink">Plan a Trip</a>
+    </div>
+
+    <div th:fragment = "notLoggedInPageHeader" class="wrapper">
+        <a id="login" th:href="@{/login}">Login</a>
+        <a id="login" th:href="@{/register}">Register</a>
+        <img id="titleImg" th:src="@{/logo.png}" alt="RoadTrip Runner"/>
+    </div>
+
+<footer th:fragment="footer">
+    <p>	Better Than Bezos &#169; 2022 </p>
+    <img th:src="@{/google.png}" id="poweredByGoogle">
+</footer>
+</body>
+</html>

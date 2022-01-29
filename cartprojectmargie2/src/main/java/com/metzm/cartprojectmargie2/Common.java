@@ -19,8 +19,7 @@ import java.util.List;
 
 @ControllerAdvice
 @SuppressWarnings("unchecked")
-    public class Common {//&&&&&&& origional
-
+    public class Common {// origional
 
     @Autowired
     private PageRepository pageRepo;

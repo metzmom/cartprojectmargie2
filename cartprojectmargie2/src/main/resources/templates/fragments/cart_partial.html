@@ -1,14 +1,21 @@
 <div class="bg-dark text-white p-3 mt-3" th:fragment="cart_partial" th:if="${notCartViewPage == null}"
      xmlns:th="http://www.w3.org/1999/xhtml"><!--if not on cart page or check out page-->
     <div class="cart cartActive" th:if="${cartActive}">
-        <p>You have <span th:text="${csize}"></span> items in your list.</p>
-    <!--    <p>Total <span th:text="'$' + ${#numbers.formatDecimal(ctotal, 0, 'COMMA', 2, 'POINT')}"></span> items in your cart.</p>-->
+        <p>You have <span th:text="${csize}"></span> items on your list.</p>
+    <!-- formats dollars   <p>Total <span th:text="'$' + ${#numbers.formatDecimal(ctotal, 0, 'COMMA', 2, 'POINT')}"></span> items in your cart.</p>-->
         <p>
             <a href="/cart/view" class="btn btn-success">View list</a>
             <a href="/cart/clear" class="btn btn-danger float-right">Clear list</a>
         </p>
     </div>
     <div class="cart cartInactive" th:unless="${cartActive}">
+      <!--  <p>Register to Create a list.</p>-->
+        <p>
+            Click <a th:href="@{/register}">here</a> to register and create a list!.
+        </p>
         <p>Your list is empty.</p>
     </div>
 </div>
+<!--<p>
+    Click <a th:href="@{/register}">here</a> to register.
+</p>-->

@@ -34,7 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                     .antMatchers("/admin/**").hasAnyRole("ADMIN")//only let admin change pages
-            //    .antMatchers("/cart/**").hasAnyRole("USER", "ADMIN" )//only let admin change pages
+            //   .antMatchers("/cart/**").hasAnyRole("USER", "ADMIN" )//only let admin change pages
+            //    .antMatchers("/cart_view/**").hasAnyRole("USER", "ADMIN" )
                        .antMatchers("/").permitAll()
                             .and()
                                 .formLogin()
@@ -49,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // http
         //     .authorizeRequests()
-        //         .antMatchers("/category/**").access("hasRole('ROLE_USER')")
+        //         .antMatchers("/categories/**").access("hasRole('ROLE_USER')")
         //         .antMatchers("/").access("permitAll");
     }
 

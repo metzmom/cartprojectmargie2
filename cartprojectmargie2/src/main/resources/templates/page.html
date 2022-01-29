@@ -1,24 +1,5 @@
     <!doctype html>
     <html lang="en"></html>
-    <!--   <head th:replace="/fragments/head"></head>
-
-
-   <body>
-       <nav th:replace="/fragments/nav :: nav-front"></nav>
-
-       <div class="container-fluid mt-5">
-           <div class="row">
-                <div class="col"> </div>-->
-    <!--   <h1> MICROGREENS 101</h1>-->
-    <!--        <div class="col-7" th:utext="${page.content}"></div>
-            <div class="col"></div>
-       </div>
-   </div>
-
-   <div th:replace="/fragments/footer"></div>
-
-</body>
-</html>-->
 
     <head th:replace="/fragments/head"></head>
 
@@ -29,7 +10,6 @@
     <div class="container-fluid mt-5">
         <div class="row">
         <div th:replace="/fragments/categories"></div>
-            <!--               <div class="col-3">categories</div>his did appear on home page but changed it to a fragment see above line-->
               <div class="col"></div>
               <div class="col-7" th:utext="${page.content}"></div>
               <div class="col"></div>
